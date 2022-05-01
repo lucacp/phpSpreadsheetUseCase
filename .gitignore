@@ -1,0 +1,6 @@
+vendor
+*.xlsx
+.env
+*.pdf
+*.xls
+*.xlsm

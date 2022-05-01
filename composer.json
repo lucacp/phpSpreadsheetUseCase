@@ -1,0 +1,10 @@
+{
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.23"
+    }
+}
