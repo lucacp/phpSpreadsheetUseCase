@@ -2,30 +2,51 @@
 
 require './vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader;
 
-$inputFileNameInit = './Tabela ';
-$tabelas = [
-  'Costa.xlsx','Elmar.xlsx','Granne Alimentos.xlsx','Jandira.pdf','JTC.xlsx',
-  'Leryc.xlsx','Mundo Safra.xlsx','Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsm',
-  'R Moura.xlsx','Tainá Alimentos.xlsx'
-];
-// $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNameInit.$tabelas[0]);
-
-// $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
-$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-//    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xml();
-//    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Ods();
-//    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Slk();
-//    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Gnumeric();
-//    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
-$spreadsheet = $reader->load($inputFileNameInit.$tabelas[0]);
-$spreadData   = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
-// var_dump($spreadData);
-// var_dump($spreadsheet);
-for($i=31;$i<180;$i++){
-  echo PHP_EOL;
-  echo $spreadData[$i]['B'].'-'.$spreadData[$i]['C'].'_'.$spreadData[$i]['D'].'_'.$spreadData[$i]['E'].'_'
-      .$spreadData[$i]['F'].'_'.$spreadData[$i]['G'].'_'.$spreadData[$i]['H'].'_'.$spreadData[$i]['I'].'_'
-      .$spreadData[$i]['J'];
+function sheetRead($inputFileName){
+  $FileName = './Tabela '.$inputFileName;
+  // $reader = new Reader\Xls();
+  $reader = new Reader\Xlsx();
+  //    $reader = new Reader\Xml();
+  //    $reader = new Reader\Ods();
+  //    $reader = new Reader\Slk();
+  //    $reader = new Reader\Gnumeric();
+  //    $reader = new Reader\Csv();
+  try{
+    $spreadsheet = $reader->load($FileName);
+    $spreadData   = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
+    return formatedData(column:formatOfTable(name:explode('.',$inputFileName)[0]),data:$spreadData);
+  }catch(Exception $e){
+    var_dump($e);
+  }
+  
+}
+function formatOfTable($name){
+  $tabela = [
+    'Costa'=>'A|B|C|D|E|J', 'Granne Alimentos'=>'A|B|C|D|F',    'JTC'=>'A|B|D|E|H|I',
+    'Elmar'=>'A|B|C|E|F|G', 'Mundo Safra'=>'A|B|C|E|F|H',       'Jandira'=>'A|B|C|D|E|F',     
+    'Leryc'=>'A|B|C|G',     'Prima Frutta'=>'A|B|C|E|F',        'Polico'=>'A|B|C|E|F|G',
+    'Magui'=>'A|B|C|E|G',   'Quinta Semente'=>'A|B|C|I|J|K|L',  'R Moura'=>'A|B|C|D|F|G',
+                            'Tainá Alimentos'=>'A|B|C|E|F|G',
+  ];
+  return $tabela[$name];
+}
+function formatedData($column,$data){
+  $dataRet = [];
+  $col = explode('|',$column);
+  $ncol= count($col);
+  for($i=10;$i<500;$i++){
+    $linha = '';
+    $empty = true;
+    for($j=0;$j<$ncol;$j++){
+      if(!($data[$i][$col[1]]==''||$data[$i][$col[1]]==null)){
+        $linha.= $j>0?('|'.$data[$i][$col[$j]]):($data[$i][$col[$j]]);
+        $empty = false;
+      }
+    }
+    $empty!=true?array_push($dataRet,explode('|',$linha)):'';
+    $linha = null;
+  }
+  return $dataRet;
 }
