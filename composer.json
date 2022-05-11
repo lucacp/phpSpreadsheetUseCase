@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "phpoffice/phpspreadsheet": "^1.23"
+        "phpoffice/phpspreadsheet": "^1.23",
+        "spatie/pdf-to-text": "^1.51"
     }
 }
