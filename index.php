@@ -8,9 +8,10 @@ $tabelas   = [
   //'Jandira.pdf',
   'JTC.xlsx',
   'Leryc.xlsx','Mundo Safra.xlsx','Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsm',
-  'R Moura.xlsx','Tainá Alimentos.xlsx'
+  'R Moura.xlsx',
+  //'Tainá Alimentos.xlsx'
 ];
-$produtos  = ['oregano','ameixa','noz moscada',];
+$produtos  = [];
 $planilhas = [];
 for($i=0;$i<count($tabelas);$i++){
   $dados  = sheetRead( $tabelas[$i] );

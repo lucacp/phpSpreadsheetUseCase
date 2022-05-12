@@ -7,23 +7,29 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 function sheetWrite($dados,$name){
-  
-  $format  = explode('|',formatOfTable(explode('.',$name)[0]));
-  $products= [];
-  $nLines  = count($dados);
-  $nColumn = count($format);
-  
-  for($j=0; $j < $nLines;$j++){ $products = array_merge( $products, explode(' ',$dados[$j][1])[0] ); }
+
+  $products   = [];
+  $linhaAtual = 1;
+  for($planilha=0; $planilha < count($dados);$planilha++){
+    $format    = explode('|',formatOfTable(explode('.',$name[$planilha])[0]));
+    $nLines    = count($dados[$planilha]);
+    $nColumn   = count($format);
+    
+    for($j=0; $j < $nLines;$j++){ $products = array_merge( $products, explode(' ',$dados[$j][1])[0] ); }
+
+  }
   
   $planilhas = count($products);
   
   for($i=0;$i < $planilhas;$i++){
     
     $spreadsheet = new Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet("planilha ".$name);
+    $sheet = $spreadsheet->getActiveSheet("planilha ".$name[$planilha]);
     
-    for( $i=0 ; $i < $nColumn ; $i++ ){
-      $sheet->setCellValue('A'.($i+3), "=A".($i+1).'+A'.($i+2) );
+    $sheet->setCellValue('A'.$linhaAtual++,'~~ '.$products[$i].' ~~');
+    
+    for( $j=0 ; $j < $nColumn ; $j++ ){
+      $sheet->setCellValue('A'.($i+$linhaAtual), $dados[$planilha][$i][$j] );
     }
   
     $writer = new Xlsx($spreadsheet);
