@@ -27,7 +27,7 @@ function sheetWrite($dados,$name){
   }
   $planilhas   = count($products);
   $linhasTotais= count($linhaProdutos);
-  $colunas = ['A','B','C','D','E','F','G','H','J','K'];
+  $colunas = ['A','B','C','D','E','F','G','H','I','J','K'];
   for( $produto = 0, $linha = 0  ; $produto < $planilhas ; $produto++,$linhaAtual=1){
     
     $spreadsheet = new Spreadsheet();
@@ -46,6 +46,7 @@ function sheetWrite($dados,$name){
           $dados[$planilha][$line][$col]!=null?$dados[$planilha][$line][$col]:'' 
         );
       }
+      $id       = $linhaProdutos[$linha+1]['id'];
       //echo PHP_EOL;
     }
     $writer = new Xlsx($spreadsheet);
