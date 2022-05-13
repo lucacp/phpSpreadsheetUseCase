@@ -5,7 +5,7 @@ require './vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Reader;
 use Spatie\PdfToText\Pdf;
 
-include 'formatSheet.php';
+include_once 'formatSheet.php';
 
 function sheetRead($inputFileName){
   $FileName = './Tabela '.$inputFileName;

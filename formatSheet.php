@@ -1,5 +1,4 @@
 <?php
-
 function formatOfTable($name){
   $tabela = [
     'Costa'=>'A|B|C|D|E|J', 'Granne Alimentos'=>'A|B|C|D|F',    'JTC'=>'A|B|D|E|H|I',

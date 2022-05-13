@@ -4,10 +4,10 @@ include "sheetRead.php";
 include "sheetWrite.php";
 
 $tabelas   = [
-  'Costa.xlsx','Elmar.xlsx','Granne Alimentos.xlsx',
+  //'Costa.xlsx','Elmar.xlsx','Granne Alimentos.xlsx',
   //'Jandira.pdf',
-  'JTC.xlsx',
-  'Leryc.xlsx','Mundo Safra.xlsx','Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsm',
+  //'JTC.xlsx',
+  //'Leryc.xlsx','Mundo Safra.xlsx','Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsm',
   'R Moura.xlsx',
   //'Tainá Alimentos.xlsx'
 ];
