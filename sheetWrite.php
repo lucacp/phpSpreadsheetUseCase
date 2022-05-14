@@ -2,6 +2,7 @@
 
 require './vendor/autoload.php';
 include_once 'formatSheet.php';
+include_once 'sort.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -25,25 +26,34 @@ function sheetWrite($dados,$name){
       array_push($linhaProdutos,array('id'=>$id,'planilha'=>$planilha,'linha'=>$linha));
     }
   }
-  $planilhas   = count($products);
-  $linhasTotais= count($linhaProdutos);
-  $colunas = ['A','B','C','D','E','F','G','H','I','J','K'];
-  for( $produto = 0, $linha = 0  ; $produto < $planilhas ; $produto++,$linhaAtual=1){
+  $linhaProdutos= merge_sortKey($linhaProdutos,'id');
+  $planilhas    = count($products);
+  $linhasTotais = count($linhaProdutos);
+  $colunas      = ['A','B','C','D','E','F','G','H','I','J'];
+  for(  $produto = 0, $linha = 0  ; $produto < $planilhas ; $produto++,$linhaAtual=1){
     
-    $spreadsheet = new Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet($products[$produto].':'.$produto);
-    $sheet->setCellValue('A'.$linhaAtual,'~'.$products[$produto].'~');
+    $spreadsheet  = new Spreadsheet();
+    $sheet        = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue(
+      'A'.$linhaAtual,
+      '~'.$products[$produto].'~'
+    );
     $linhaAtual++;
-    $id       = $linhaProdutos[$linha]['id'];
-    for(      ; $linha < $linhasTotais && $id == $produto ; $linha++, $linhaAtual++ ){
-      $planilha = $linhaProdutos[$linha]['planilha'];
-      $line     = $linhaProdutos[$linha]['linha']; 
-      for( $col=0 ; $col < count($colunas) && $dados[$planilha][$line][$col]!=null ; $col++ ){
+    $id           = $linhaProdutos[$linha]['id'];
 
-        //echo $dados[$planilha][$i][$col].' ';
+    for(      ; $linha < $linhasTotais && $id == $produto ; $linha++, $linhaAtual++ ){
+    
+      $planilha     = $linhaProdutos[$linha]['planilha'];
+      $line         = $linhaProdutos[$linha]['linha']; 
+    
+      for(      $col = 0 ; $col < count($colunas) && $dados[$planilha][$line][$col]!=null ; $col++ ){
+
+        $cell = $dados[$planilha][$line][$col];
         $sheet->setCellValue(
           $colunas[$col].($linhaAtual), 
-          $dados[$planilha][$line][$col]!=null?$dados[$planilha][$line][$col]:'' 
+          $col==0?(
+            explode('.',$name[$planilha])[0].': '.($cell!=null?$cell:'')
+          ):($cell!=null?$cell:'') 
         );
       }
       $id       = $linhaProdutos[$linha+1]['id'];
@@ -52,7 +62,5 @@ function sheetWrite($dados,$name){
     $writer = new Xlsx($spreadsheet);
     $writer->save('.\\planilhas\\'.$products[$produto].'.xlsx');
   }
-  
-  
-    
+      
 }

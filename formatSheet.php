@@ -4,7 +4,7 @@ function formatOfTable($name){
     'Costa'=>'A|B|C|D|E|J', 'Granne Alimentos'=>'A|B|C|D|F',    'JTC'=>'A|B|D|E|H|I',
     'Elmar'=>'A|B|C|E|F|G', 'Mundo Safra'=>'A|B|C|E|F|H',       'Jandira'=>'A|B|C|D|E|F',     
     'Leryc'=>'A|B|C|G',     'Prima Frutta'=>'A|B|C|E|F',        'Polico'=>'A|B|C|E|F|G',
-    'Magui'=>'A|B|C|E|G',   'Quinta Semente'=>'A|B|C|I|J|K|L',  'R Moura'=>'A|B|C|D|F|G',
+    'Magui'=>'A|B|C|E|G',   'Quinta Semente'=>'A|B|C|E|F|G|J',  'R Moura'=>'A|B|C|D|F|G',
                             'Tainá Alimentos'=>'A|B|C|E|F|G',
   ];
   return $tabela[$name];
