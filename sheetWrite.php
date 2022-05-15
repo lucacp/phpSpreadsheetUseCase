@@ -2,6 +2,7 @@
 
 require './vendor/autoload.php';
 include_once 'formatSheet.php';
+include_once 'tokenizer.php';
 include_once 'sort.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -19,11 +20,19 @@ function sheetWrite($dados,$name){
     
     for( $linha    = 0; $linha < $nLines ; $linha++ ){ 
       //var_dump('dados[planilha][$j][1]: '.$dados[$planilha][$j][1]);
-      $nome         = explode(' ',$dados[$planilha][$linha][1])[0];
+      $nome         = tokenizeProductName($dados[$planilha][$linha][1]);
       $products     = array_unique(array_merge($products,array($nome)));
       $id           = array_search($nome,$products);
 
-      array_push($linhaProdutos,array('id'=>$id,'planilha'=>$planilha,'linha'=>$linha));
+      array_push(
+        $linhaProdutos,
+        array(
+          'id'=>$id,
+          'planilha'=>$planilha,
+          'linha'=>$linha,
+          'colunas'=>lengthOfTable($name[$planilha])
+        )
+      );
     }
   }
   $linhaProdutos= merge_sortKey($linhaProdutos,'id');
@@ -44,19 +53,21 @@ function sheetWrite($dados,$name){
     for(      ; $linha < $linhasTotais && $id == $produto ; $linha++, $linhaAtual++ ){
     
       $planilha     = $linhaProdutos[$linha]['planilha'];
-      $line         = $linhaProdutos[$linha]['linha']; 
-    
-      for(      $col = 0 ; $col < count($colunas) && $dados[$planilha][$line][$col]!=null ; $col++ ){
+      $line         = $linhaProdutos[$linha]['linha'];
+      $colunasLength= $linhaProdutos[$linha]['colunas'];
+      for(      $col = 0 ; $col < count($colunas) ; $col++ ){
 
         $cell = $dados[$planilha][$line][$col];
         $sheet->setCellValue(
           $colunas[$col].($linhaAtual), 
           $col==0?(
             explode('.',$name[$planilha])[0].': '.($cell!=null?$cell:'')
-          ):($cell!=null?$cell:'') 
+          ):($cell!=null?$cell:' ') 
         );
       }
-      $id       = $linhaProdutos[$linha+1]['id'];
+      $id           = $linhaProdutos[$linha+1]['id'];
+      $colunasLength= $linhaProdutos[$linha+1]['colunas'];
+
       //echo PHP_EOL;
     }
     $writer = new Xlsx($spreadsheet);

@@ -4,7 +4,9 @@ include "sheetRead.php";
 include "sheetWrite.php";
 
 $tabelas   = [
-  'Costa.xlsx','Elmar.xlsx','Granne Alimentos.xlsx','Magui.xlsx',
+  'Costa.xlsx','Elmar.xlsx',
+  //'Granne Alimentos.xlsx',
+  'Magui.xlsx',
   //'Jandira.pdf',
   'JTC.xlsx',
   'Leryc.xlsx','Mundo Safra.xlsx','Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsx',

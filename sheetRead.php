@@ -19,7 +19,7 @@ function sheetRead($inputFileName){
   try{
     $spreadsheet = $reader->load($FileName);
     $spreadData   = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
-    return formatedData(column:formatOfTable(name:explode('.',$inputFileName)[0]),data:$spreadData);
+    return formatedData(column:formatOfTable(name:$inputFileName),data:$spreadData);
   }catch(Exception $e){
     /*$arq = (new Pdf('vendor/spatie/pdfToText/Pdf'))
     ->setPdf($FileName)
