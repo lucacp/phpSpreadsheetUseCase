@@ -38,7 +38,7 @@ function sheetWrite($dados,$name){
   $linhaProdutos= merge_sortKey($linhaProdutos,'id');
   $planilhas    = count($products);
   $linhasTotais = count($linhaProdutos);
-  $colunas      = ['A','B','C','D','E','F','G','H','I','J'];
+  $colunas      = ['A','B','C','D','E','F','G'];
   for(  $produto = 0, $linha = 0  ; $produto < $planilhas ; $produto++,$linhaAtual=1){
     
     $spreadsheet  = new Spreadsheet();
@@ -54,7 +54,7 @@ function sheetWrite($dados,$name){
     
       $planilha     = $linhaProdutos[$linha]['planilha'];
       $line         = $linhaProdutos[$linha]['linha'];
-      $colunasLength= $linhaProdutos[$linha]['colunas'];
+      //$colunasLength= $linhaProdutos[$linha]['colunas'];
       for(      $col = 0 ; $col < count($colunas) ; $col++ ){
 
         $cell = $dados[$planilha][$line][$col];
@@ -66,12 +66,17 @@ function sheetWrite($dados,$name){
         );
       }
       $id           = $linhaProdutos[$linha+1]['id'];
-      $colunasLength= $linhaProdutos[$linha+1]['colunas'];
+      //$colunasLength= $linhaProdutos[$linha+1]['colunas'];
 
       //echo PHP_EOL;
     }
     $writer = new Xlsx($spreadsheet);
     $writer->save('.\\planilhas\\'.$products[$produto].'.xlsx');
   }
-      
+  $linhaProdutos=null;
+  unset($linhaProdutos);
+  $products = null;
+  unset($products);
+  $dados = null;
+  unset($dados);   
 }

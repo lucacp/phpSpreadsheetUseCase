@@ -1,7 +1,7 @@
 <?php
 function formatOfTable($name){
   $tabela = [
-             'Costa'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'D','unidade'=>'E','preco'=>'J'],
+             'Costa'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'D','unidade'=>'E','preco'=>'I'],
              'Elmar'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
    //'Granne Alimentos'=>['A','B','C','D','F'],
                'JTC'=>['codigo'=>'A','produto'=>'B','origem'=>'A','embalagem'=>'H','unidade'=>'I','preco'=>'D'],
