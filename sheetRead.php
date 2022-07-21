@@ -3,7 +3,6 @@
 require './vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Reader;
-use Spatie\PdfToText\Pdf;
 
 include_once 'formatSheet.php';
 
@@ -21,10 +20,9 @@ function sheetRead($inputFileName){
     $spreadData   = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
     return formatedData(column:formatOfTable(name:$inputFileName),data:$spreadData);
   }catch(Exception $e){
-    /*$arq = (new Pdf('vendor/spatie/pdfToText/Pdf'))
-    ->setPdf($FileName)
-    ->text();
-    return $arq;*/
-    var_dump($e);
+    $ret = [];
+    exec(command:"node sheetReadPDF.js",output:$ret);
+    var_dump($ret);
+    return $ret;
   }
 }

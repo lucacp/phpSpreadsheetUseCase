@@ -6,7 +6,7 @@ function formatOfTable($name){
    //'Granne Alimentos'=>['A','B','C','D','F'],
                'JTC'=>['codigo'=>'A','produto'=>'B','origem'=>'A','embalagem'=>'H','unidade'=>'I','preco'=>'D'],
        'Mundo Safra'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'F'],
-           'Jandira'=>['A','B','C','D','E','F'],
+           'Jandira'=>['A','B','C','D','E','F','G'],
              'Leryc'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'G'],
       'Prima Frutta'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
             'Polico'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
@@ -41,4 +41,20 @@ function formatedData($column,$data){
 }
 function lengthOfTable($name){
   return count(formatOfTable($name));
+}
+function formatPDF($dados){
+  $formato = [ 'A','B','C','E','F','G','D'];
+  $array = [];
+  $total = count($dados);
+  $formatCount = count($formato);
+  $linha = [];
+  for( $i = 2 ; $i < $total ; $i++){
+    if($dados[$i]=="R$") continue;
+    array_push($linha,$dados[$i]);
+    if( count($linha) >= $formatCount){
+      array_push($array,$linha);
+      $linha = [];
+    }
+  }
+  return $array;
 }
