@@ -22,7 +22,7 @@ function sheetRead($inputFileName){
   }catch(Exception $e){
     $ret = [];
     exec(command:"node sheetReadPDF.js",output:$ret);
-    var_dump($ret);
-    return $ret;
+    //print_r($ret);
+    return formatPDF(array_slice($ret,2));
   }
 }

@@ -43,18 +43,19 @@ function lengthOfTable($name){
   return count(formatOfTable($name));
 }
 function formatPDF($dados){
+  echo 'FormatPDF'.PHP_EOL;
   $formato = [ 'A','B','C','E','F','G','D'];
   $array = [];
   $total = count($dados);
-  $formatCount = count($formato);
-  $linha = [];
-  for( $i = 2 ; $i < $total ; $i++){
-    if($dados[$i]=="R$") continue;
-    array_push($linha,$dados[$i]);
-    if( count($linha) >= $formatCount){
-      array_push($array,$linha);
-      $linha = [];
+  for( $i = 0 ; $i < $total ; $i++){
+    $linha = preg_replace("/ +/", " ", $dados[$i]);
+    $linha = explode("_",$linha);
+    $nova  = [];
+    for( $j = 0 ; $j < count($linha) ; $j++ ){
+      if($linha[$j]=="R$ ") continue;
+      echo ($j+1).": $linha[$j];\n";
     }
+    array_push($array,$nova); 
   }
   return $array;
 }
