@@ -20,4 +20,4 @@ for($i=0;$i<count($tabelas);$i++){
   $dados  = sheetRead( $tabelas[$i] );
   array_push( $planilhas , $dados );
 }
-//sheetWrite(dados:$planilhas,name:$tabelas);
+sheetWrite(dados:$planilhas,name:$tabelas);

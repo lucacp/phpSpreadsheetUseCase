@@ -6,7 +6,7 @@ function formatOfTable($name){
    //'Granne Alimentos'=>['A','B','C','D','F'],
                'JTC'=>['codigo'=>'A','produto'=>'B','origem'=>'A','embalagem'=>'H','unidade'=>'I','preco'=>'D'],
        'Mundo Safra'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'F'],
-           'Jandira'=>['A','B','C','D','E','F','G'],
+           'Jandira'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'E','unidade'=>'F','preco'=>'D'],
              'Leryc'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'G'],
       'Prima Frutta'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
             'Polico'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
@@ -43,8 +43,8 @@ function lengthOfTable($name){
   return count(formatOfTable($name));
 }
 function formatPDF($dados){
-  echo 'FormatPDF'.PHP_EOL;
-  $formato = [ 'A','B','C','E','F','G','D'];
+  //echo 'FormatPDF'.PHP_EOL;
+  $formato = [0,1,2,5,6,7,3];
   $array = [];
   $total = count($dados);
   for( $i = 0 ; $i < $total ; $i++){
@@ -52,8 +52,9 @@ function formatPDF($dados){
     $linha = explode("_",$linha);
     $nova  = [];
     for( $j = 0 ; $j < count($linha) ; $j++ ){
-      if($linha[$j]=="R$ ") continue;
-      echo ($j+1).": $linha[$j];\n";
+      $k = $formato[$j];
+      if($linha[$k]=="R$ ") continue;
+      array_push($nova,$linha[$k]); 
     }
     array_push($array,$nova); 
   }
