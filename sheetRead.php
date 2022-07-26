@@ -15,11 +15,13 @@ function sheetRead($inputFileName){
   //    $reader = new Reader\Slk();
   //    $reader = new Reader\Gnumeric();
   //    $reader = new Reader\Csv();
-  try{
-    $spreadsheet = $reader->load($FileName);
-    $spreadData   = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
+  $reader->setReadDataOnly(TRUE);
+  $ext = explode('.',$inputFileName)[1];
+  if( $ext == 'xlsx' ){
+    $spreadsheet  = $reader->load($FileName);
+    $spreadData   = $spreadsheet->getActiveSheet()->toArray(NULL,TRUE,TRUE,TRUE);
     return formatedData(column:formatOfTable(name:$inputFileName),data:$spreadData);
-  }catch(Exception $e){
+  }elseif($ext == 'pdf'){
     $ret = [];
     exec(command:"node sheetReadPDF.js",output:$ret);
     //print_r($ret);
