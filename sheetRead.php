@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\Reader;
 include_once 'formatSheet.php';
 
 function sheetRead($inputFileName){
-  $FileName = './Tabela '.$inputFileName;
+  $FileName = './Lista '.$inputFileName;
   // $reader = new Reader\Xls();
   $reader = new Reader\Xlsx();
   //    $reader = new Reader\Xml();

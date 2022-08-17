@@ -1,4 +1,4 @@
-const filename = 'Tabela Jandira.pdf';
+const filename = 'Lista Jandira.pdf';
 var PdfReader = require('pdfreader');
 
 const nbCols = 1;
