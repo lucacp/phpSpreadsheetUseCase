@@ -12,7 +12,7 @@ $tabelas   = [
   'Leryc.xlsx',
   'Gramore.xlsx',
   //'Mundo Safra.xlsx',
-  'Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsx',
+  'Polico.xlsx','Prima Frutta.xlsx',
   'R Moura.xlsx',
   //'Tainá Alimentos.xlsx'
 ];
