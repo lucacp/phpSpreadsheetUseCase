@@ -3,6 +3,7 @@ function formatOfTable($name){
   $tabela = [
              'Costa'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'D','unidade'=>'E','preco'=>'I'],
              'Elmar'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
+           'Gramore'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'C','unidade'=>'E','preco'=>'F'],
   'Granne Alimentos'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'C','unidade'=>'D','preco'=>'F'],
                'JTC'=>['codigo'=>'A','produto'=>'B','origem'=>'A','embalagem'=>'H','unidade'=>'I','preco'=>'D'],
     //   'Mundo Safra'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'F'],

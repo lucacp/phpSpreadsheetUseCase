@@ -10,6 +10,7 @@ $tabelas   = [
   'Jandira.pdf',
   'JTC.xlsx',
   'Leryc.xlsx',
+  'Gramore.xlsx',
   //'Mundo Safra.xlsx',
   'Polico.xlsx','Prima Frutta.xlsx','Quinta Semente.xlsx',
   'R Moura.xlsx',
