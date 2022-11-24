@@ -7,7 +7,7 @@ $tabelas   = [
   'Costa.xlsx','Elmar.xlsx',
   //'Granne Alimentos.xlsx',
   'Magui.xlsx',
-  'Jandira.pdf',
+  'Jandira.xlsx',
   'JTC.xlsx',
   'Leryc.xlsx',
   'Gramore.xlsx',
