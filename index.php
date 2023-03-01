@@ -5,16 +5,13 @@ include "sheetWrite.php";
 
 $tabelas   = [
   'Costa.xlsx','Elmar.xlsx',
-  //'Granne Alimentos.xlsx',
-  'Magui.xlsx',
+  'Granne Alimentos.xlsx',
   'Jandira.xlsx',
   'JTC.xlsx',
   'Leryc.xlsx',
   'Gramore.xlsx',
-  //'Mundo Safra.xlsx',
   'Polico.xlsx','Prima Frutta.xlsx',
-  'R Moura.xlsx',
-  //'Tainá Alimentos.xlsx'
+  'R Moura.xlsx'
 ];
 $planilhas = [];
 for($i=0;$i<count($tabelas);$i++){
