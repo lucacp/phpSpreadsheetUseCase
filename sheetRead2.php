@@ -6,29 +6,6 @@ use PhpOffice\PhpSpreadsheet\Reader;
 
 include_once 'formatSheet.php';
 
-function sheetRead($inputFileName){
-  $FileName = './Lista '.$inputFileName;
-  // $reader = new Reader\Xls();
-  $reader = new Reader\Xlsx();
-  //    $reader = new Reader\Xml();
-  //    $reader = new Reader\Ods();
-  //    $reader = new Reader\Slk();
-  //    $reader = new Reader\Gnumeric();
-  //    $reader = new Reader\Csv();
-  $reader->setReadDataOnly(TRUE);
-  $ext = explode('.',$inputFileName)[1];
-  if( $ext == 'xlsx' ){
-    $spreadsheet  = $reader->load($FileName);
-    $spreadData   = $spreadsheet->getActiveSheet()->toArray(NULL,TRUE,TRUE,TRUE);
-    return formatedData(column:formatOfTable(name:$inputFileName),data:$spreadData);
-  }elseif($ext == 'pdf'){
-    $ret = [];
-    exec(command:"node sheetReadPDF.js",output:$ret);
-    //print_r($ret);
-    return formatPDF(array_slice($ret,2));
-  }
-}
-
 function sheetRead2($inputFileName){
   $FileName = './Lista '.$inputFileName;
   // $reader = new Reader\Xls();
@@ -70,4 +47,10 @@ function sheetRead2($inputFileName){
     }
     return $dataRet;
   }
+  /* elseif($ext == 'pdf'){ Jandira agora é xlsx
+    $ret = [];
+    exec(command:"node sheetReadPDF.js",output:$ret);
+    //print_r($ret);
+    return formatPDF(array_slice($ret,2));
+  } */
 }

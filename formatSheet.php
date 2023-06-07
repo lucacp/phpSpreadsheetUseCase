@@ -1,20 +1,20 @@
 <?php
 function formatOfTable($name){
   $tabela = [
-             'Costa'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'D','unidade'=>'E','preco'=>'I'],
+             'Costa'=>['codigo'=>'B','produto'=>'A','origem'=>'C','embalagem'=>'D','unidade'=>'E','preco'=>'H'],
              'Elmar'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
            'Gramore'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'C','unidade'=>'E','preco'=>'F'],
-  'Granne Alimentos'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'C','unidade'=>'D','preco'=>'F'],
-               'JTC'=>['codigo'=>'A','produto'=>'B','origem'=>'A','embalagem'=>'H','unidade'=>'I','preco'=>'D'],
+  'Granne Alimentos'=>['codigo'=>'C','produto'=>'A','origem'=>'B','embalagem'=>'B','unidade'=>'F','preco'=>'D'],
+               'JTC'=>['codigo'=>'G','produto'=>'A','origem'=>'G','embalagem'=>'G','unidade'=>'B','preco'=>'C'],
     //   'Mundo Safra'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'F'],
-           'Jandira'=>['codigo'=>'A','produto'=>'B','origem'=>'C','embalagem'=>'F','unidade'=>'G','preco'=>'E'],
-             'Leryc'=>['codigo'=>'A','produto'=>'B','origem'=>'H','embalagem'=>'C','unidade'=>'C','preco'=>'G'],
+           'Jandira'=>['codigo'=>'A','produto'=>'B','origem'=>'F','embalagem'=>'C','unidade'=>'G','preco'=>'E'],
+             'Leryc'=>['codigo'=>'G','produto'=>'A','origem'=>'G','embalagem'=>'B','unidade'=>'B','preco'=>'F'],
       'Prima Frutta'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
             'Polico'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'F','preco'=>'E'],
              'Magui'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'D','preco'=>'E'],
     'Quinta Semente'=>['codigo'=>'A','produto'=>'C','origem'=>'J','embalagem'=>'B','unidade'=>'F','preco'=>'E'],  
-           'R Moura'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'D','preco'=>'F'],
-      'Suprema Caju'=>['A','B','C','E','F','G'],
+           'R Moura'=>['codigo'=>'A','produto'=>'B','origem'=>'G','embalagem'=>'C','unidade'=>'E','preco'=>'F'],
+           'Iberica'=>['codigo'=>'D','produto'=>'A','origem'=>'F','embalagem'=>'B','unidade'=>'B','preco'=>'E'],
   ];
   $nome = explode('.',$name)[0];
   return $tabela[$nome];

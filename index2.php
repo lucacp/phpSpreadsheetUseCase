@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__.'/vendor/autoload.php';
+
 include "sheetRead.php";
 include "sheetWrite.php";
 
@@ -10,12 +12,14 @@ $tabelas   = [
   'JTC.xlsx',
   'Leryc.xlsx',
   'Gramore.xlsx',
-  'Polico.xlsx','Iberica.xlsx',
-  'R Moura.xlsx'
+  'Polico.xlsx',
+  'R Moura.xlsx','Iberica.xlsx'
 ];
 $planilhas = [];
+
 for($i=0;$i<count($tabelas);$i++){
-  $dados  = sheetRead( $tabelas[$i] );
+  $dados  = sheetRead2( $tabelas[$i] );
+  //var_dump($dados);
   array_push( $planilhas , $dados );
 }
-sheetWrite(dados:$planilhas,name:$tabelas);
+sheetWrite2(dados:$planilhas,tabelas:$tabelas);
