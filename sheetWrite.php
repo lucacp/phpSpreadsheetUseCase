@@ -89,15 +89,16 @@ function sheetWrite2($dados,$tabelas){
     //$boolColumnName= false;
     for( $numLine = 0; $numLine < $numLines ; $numLine++ ){
       $line  = $dados[$planilha][$numLine];
-      $split = tokenizeProductName($line);
-      //$split = explode("|",$split);
+      $split = explode("|",$line);
       $first= '';
+      //echo $line.PHP_EOL;
       $intIsNumber = (int)$split[$numColumnName];
       if($intIsNumber>0) $intIsNumber = (int)$split[$numColumnName++];
-      $first = $split[$numColumnName];
-      //echo $first.' ';
+      $nameProduct = tokenizeProductName($split[$numColumnName]);
+      $first = $nameProduct;
       $products = array_unique( array_merge( $products, array($first) ) );
       $id       = array_search( $first,$products);
+      //echo $first.",id: $id; ";
       $split    = null;
       //echo $id.', '.$planilha.', '.$numColumnName.', '.$numLine.', '.$first.PHP_EOL;
       array_push($linhaProdutos,
@@ -115,38 +116,43 @@ function sheetWrite2($dados,$tabelas){
   $linhaProdutos  = merge_sortKey($linhaProdutos,'id');
   $planilhas      = count($products);
   $linhasTotais   = count($linhaProdutos);
-  foreach($products as $linha){
-    echo $linha.PHP_EOL;
+  foreach($linhaProdutos as $linha){
+    echo 'id: '.$linha['id'].", planilha: ".$linha['planilha'].', col: '.$linha['coluna'].', linha: '.$linha['linha'].PHP_EOL;
   }
   $linhaAtual     = 1;
   $colunas        = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
-  for(  $produto = 0, $linha = 0 ; $produto < $planilhas ; $produto++, $linhaAtual=1 ){
-    $id          = $produto;
+  $countCol       = count($colunas);
+  for(  $produtoId = 0, $linha = 0 ; $produtoId < $planilhas ; $produtoId++, $linhaAtual=1 ){
+    $id          = $produtoId;
     $spreadsheet = new Spreadsheet();
     $sheet       = $spreadsheet->getActiveSheet();
+    //$sheet->setTitle(''.$products[$produtoId]);
     $sheet->setCellValue(
       'A'.$linhaAtual++,
-      '~'.$products[$produto].'~'
+      '~'.$products[$produtoId].'~'
     );
-    for( ; $linha < $linhasTotais && $id == $produto ; ++$linha,$linhaAtual++ ){
+    for( ; $linha < $linhasTotais && $id == $produtoId ; ++$linha,$linhaAtual++ ){
       $planilha = $linhaProdutos[$linha]['planilha'];
       $numLinha = $linhaProdutos[$linha]['linha'];
       $numColuna= $linhaProdutos[$linha]['coluna'];
       $line     = explode('|',$dados[$planilha][$numLinha]);
-      $countCol = count($colunas);
-      for( $col = 0; $col < $countCol ; $col++ ){
+      for( $col = 0, $wCol = 0 ; $col < $countCol ; $col++, $wCol++ ){
         if( $col == 1 && $numColuna == 2 ) 
           ++$col;
         $cell = strlen($line[$col])>1?$line[$col]:'';
         $sheet->setCellValue(
-          ''.$colunas[$col].$linhaAtual,
+          ''.$colunas[$wCol].$linhaAtual,
           $col==0?explode('.',$tabelas[$planilha])[0].': '.$cell:$cell
         );
       }
-      $id = $planilha = $linhaProdutos[$linha]['planilha'];
+      $id = $linha+1<$linhasTotais?$linhaProdutos[$linha+1]['id']:$id;
     }
     $writer = new Xlsx($spreadsheet);
-    $writer->save('.\\planilhas\\'.$products[$produto].'.xlsx');
+    $writer->save('.\\planilhas\\'.$products[$produtoId].'.xlsx');
+    unset($sheet);
+    $spreadsheet->disconnectWorksheets();
+    unset($spreadsheet);
+    unset($writer);
   }
   $linhaProdutos=null;
   unset($linhaProdutos);

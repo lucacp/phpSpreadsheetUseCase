@@ -33,11 +33,6 @@ function sheetRead2($inputFileName){
   $FileName = './Lista '.$inputFileName;
   // $reader = new Reader\Xls();
   $reader = new Reader\Xlsx();
-  //    $reader = new Reader\Xml();
-  //    $reader = new Reader\Ods();
-  //    $reader = new Reader\Slk();
-  //    $reader = new Reader\Gnumeric();
-  //    $reader = new Reader\Csv();
   $reader->setReadDataOnly(TRUE);
   $ext = explode('.',$inputFileName)[1];
   if( $ext == 'xlsx' ){

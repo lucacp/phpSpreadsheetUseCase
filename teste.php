@@ -17,26 +17,28 @@ $reader->setReadDataOnly(TRUE);
 $spreadsheet  = $reader->load($fileName);
 $spreadData   = $spreadsheet->getActiveSheet();
 $colunas      = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-$conteudo = false;
+
 //echo '-------------------------------------------------'.PHP_EOL;
 $arrayLine = [];
+$strings = new SplMaxHeap();
 for( $i = 1 ; $i < 800 ; $i++ ){
   $line = "";
   for ( $j = 0 ; $j < 12 ; $j++ ) {
     $cell = $colunas[$j].$i;
-    $dataCell = $spreadData->getCell($cell);
+    $dataCell = $spreadData->getCell($cell)->getCalculatedValue();
     $lengthDataCell = strlen($dataCell);
-    if( $lengthDataCell < 150 ){
+    if( $lengthDataCell > 5 ){
       $line .='|'.$dataCell;
+      $strings->insert([''.$dataCell=>$lengthDataCell]);
     }
+    
   }
   //echo 
   array_push($arrayLine,strlen($line)>13?("$i:".$line. PHP_EOL):'');
   
-  if(!$conteudo && preg_filter("/ICMS/",'',$line)) { $conteudo = true; }
-  if($conteudo && strlen($line) < 15) break;
 }
-/* foreach($arrayLine as $line){
-  echo $line;
-}; */
+for($strings->top() ; $strings->valid(); $strings->next()){
+  list($string, $lenght) = [key($strings->current()),current($strings->current())];
+  echo $string.': '.$lenght . PHP_EOL;
+}
 //echo '-------------------------------------------------'.PHP_EOL;
