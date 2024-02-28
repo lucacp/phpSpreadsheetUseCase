@@ -116,9 +116,9 @@ function sheetWrite2($dados,$tabelas){
   $linhaProdutos  = merge_sortKey($linhaProdutos,'id');
   $planilhas      = count($products);
   $linhasTotais   = count($linhaProdutos);
-  foreach($linhaProdutos as $linha){
+  /* foreach($linhaProdutos as $linha){
     echo 'id: '.$linha['id'].", planilha: ".$linha['planilha'].', col: '.$linha['coluna'].', linha: '.$linha['linha'].PHP_EOL;
-  }
+  } */
   $linhaAtual     = 1;
   $colunas        = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'];
   $countCol       = count($colunas);

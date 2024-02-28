@@ -13,7 +13,7 @@ $tabelas   = [
   'Leryc.xlsx',
   'Gramore.xlsx',
   'Polico.xlsx',
-  'R Moura.xlsx','Iberica.xlsx'
+  'R Moura.xlsx','Iberica.xlsx','Reino Alimentos.xlsx'
 ];
 $planilhas = [];
 
