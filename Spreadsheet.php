@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Reader;
 
 class Spreadsheet
 {
-	private $spreadsheet;
+	protected $spreadsheet;
 	//protected function save($fileName){}
 	//protected function load($fileName){}
 };
@@ -27,13 +27,20 @@ class XlsxSpreadsheet extends Spreadsheet
 	function readActiveSheet(){
 		$colunas = range("A","M");
 		//print_r($colunas);
-		$response = array();
+		$response = [];
+		$nCol = count($colunas);
 		for($line = 1; $line < 2000; $line++){
 			$linha = '';
-			for($col = 0; $col < count($colunas);$col++){
-				$retorno = $this->spreadsheet->getCell(''.$colunas[$col].$line);
-				$linha.= strlen($linha)>2?'|'.$linha:'';
+			for( $col = 0; $col < $nCol; $col++){
+				$cell = $colunas[$col].''.$line;
+				//echo $cell,' ';
+				$retorno = $this->spreadsheet->getCell($cell)->getCalculatedValue();
+				if($col == 0)
+					$linha.= strlen($retorno)>2?$retorno:'_';
+				else
+					$linha.= strlen($retorno)>2?'|'.$retorno:'|';
 			}
+			//echo $linha,' ';
 			if(strlen($linha)>13){
 				array_push($response,$linha);
 			}
@@ -43,7 +50,7 @@ class XlsxSpreadsheet extends Spreadsheet
 };
 
 $teste = new XlsxSpreadsheet();
-$teste->load("Lista Costa.xlsx");
+$teste->load("./Lista Costa.xlsx");
 $response = $teste->readActiveSheet();
 print_r($response);
 unset($teste);
