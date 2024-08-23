@@ -29,19 +29,19 @@ class XlsxSpreadsheet extends Spreadsheet
 		//print_r($colunas);
 		$response = [];
 		$nCol = count($colunas);
-		for($line = 1; $line < 2000; $line++){
-			$linha = '';
+		for($line = 1; $line < 2000 ; $line++){
+			$linha = $line.'|';
 			for( $col = 0; $col < $nCol; $col++){
 				$cell = $colunas[$col].''.$line;
 				//echo $cell,' ';
 				$retorno = $this->spreadsheet->getCell($cell)->getCalculatedValue();
 				if($col == 0)
-					$linha.= strlen($retorno)>2?$retorno:'_';
+					$linha.= strlen($retorno)>8?$retorno:'_';
 				else
-					$linha.= strlen($retorno)>2?'|'.$retorno:'|';
+					$linha.= strlen($retorno)>8?'|'.$retorno:'|';
 			}
 			//echo $linha,' ';
-			if(strlen($linha)>13){
+			if(strlen($linha)>19){
 				array_push($response,$linha);
 			}
 		}
@@ -49,8 +49,24 @@ class XlsxSpreadsheet extends Spreadsheet
 	}
 };
 
-$teste = new XlsxSpreadsheet();
-$teste->load("./Lista Costa.xlsx");
-$response = $teste->readActiveSheet();
-print_r($response);
-unset($teste);
+$tabelas   = [
+  'Costa.xlsx','Elmar.xlsx',
+  'Granne Alimentos.xlsx',
+  'Iberica.xlsx',
+  'Jandira.xlsx',
+  'JTC.xlsx',
+  'Leryc.xlsx',
+  'Gramore.xlsx',
+  'Polico.xlsx',
+  'R Moura.xlsx', //leek de memoria
+  'Reino Alimentos.xlsx'
+];
+for($i=0;$i<count($tabelas);$i++){
+	$teste = new XlsxSpreadsheet();
+	$teste->load("./Lista ".$tabelas[$i]);
+	$response = $teste->readActiveSheet();
+	echo $tabelas[$i].": ";
+	print_r($response);
+	$teste = null;
+	$response = null;
+}
